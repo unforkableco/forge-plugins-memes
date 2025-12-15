@@ -1,0 +1,92 @@
+# Meme Search Plugin for Fabrikator
+# Search for memes by text using Google Custom Search and AI refinement
+
+plugin:
+  name: Meme Search
+  slug: memes
+  author: Fabrikator Team
+  description: |
+    Search for memes online by text description.
+    Uses GPT-4o to refine the search query and Google Custom Search to find the image.
+  tags:
+    - meme
+    - search
+    - image
+    - fun
+  iconUrl: https://fabrikator.ai/icons/meme.png
+
+requirements:
+  apiKeys:
+    - name: OPENAI_API_KEY
+      description: OpenAI API key for query refinement
+      required: true
+      fallback: platform
+    - name: GOOGLE_API_KEY
+      description: Google Custom Search API Key
+      required: true
+      fallback: none
+    - name: GOOGLE_CX
+      description: Google Custom Search Engine ID
+      required: true
+      fallback: none
+  environment: []
+
+capabilities:
+  executionDefaults:
+    type: docker
+    config:
+      image: ghcr.io/unforkableco/forge-plugins-memes:latest
+      port: 8080
+
+  prompts:
+    agents:
+      - agent: cad
+        position: append
+        priority: 50
+        content: |
+          ## MEME SEARCH CAPABILITY
+          
+          You can search for memes using the `find_meme` tool.
+          
+          **When to use this:**
+          - When the user asks for a meme.
+          - To find a specific meme format or reaction image.
+          
+          **Example:**
+          ```
+          call_plugin(
+            pluginSlug="forge-plugins-memes",
+            toolName="find_meme",
+            args={
+              text: "woman yelling at cat",
+              model: "gpt-4o"
+            }
+          )
+          ```
+          
+          The tool returns the meme image as an artifact.
+
+  tools:
+    - name: find_meme
+      description: |
+        Search for a meme by description. Returns the image artifact.
+      parameters:
+        type: object
+        properties:
+          text:
+            type: string
+            description: Description of the meme to find.
+          model:
+            type: string
+            description: Model to use for query refinement (default: gpt-4o).
+            default: "gpt-4o"
+        required:
+          - text
+        additionalProperties: false
+      execution:
+        config:
+          endpoint: /find_meme
+          timeout: 45000
+
+pricing:
+  model: free
