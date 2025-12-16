@@ -28,19 +28,22 @@ app.get('/health', (req, res) => {
 });
 
 interface FindMemeRequest {
-    text: string;
-    model?: string;
+    args: {
+        description: string;
+        model?: string;
+    }
 }
 
 app.post('/find_meme', async (req, res) => {
     try {
-        const { text, model = 'gpt-4o' } = req.body as FindMemeRequest;
+        const { args } = req.body as FindMemeRequest;
+        const { description, model = 'gpt-4o' } = args || {};
 
-        if (!text) {
-            return res.status(400).json({ error: 'Missing text parameter' });
+        if (!description) {
+            return res.status(400).json({ error: 'Missing description parameter' });
         }
 
-        console.log(`Searching for meme: "${text}" using model: ${model}`);
+        console.log(`Searching for meme: "${description}" using model: ${model}`);
 
         // Step 1: Refine query using OpenAI
         const completion = await openai.chat.completions.create({
@@ -52,12 +55,12 @@ app.post('/find_meme', async (req, res) => {
                 },
                 {
                     role: 'user',
-                    content: text
+                    content: description
                 }
             ]
         });
 
-        const searchQuery = completion.choices[0].message.content?.trim() || text;
+        const searchQuery = completion.choices[0].message.content?.trim() || description;
         console.log(`Refined query: "${searchQuery}"`);
 
         // Step 2: Google Custom Search

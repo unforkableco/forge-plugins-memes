@@ -62,7 +62,7 @@ capabilities:
             pluginSlug="forge-plugins-memes",
             toolName="find_meme",
             args={
-              text: "woman yelling at cat",
+              description: "woman yelling at cat",
               model: "gpt-4o"
             }
           )
@@ -77,7 +77,7 @@ capabilities:
       parameters:
         type: object
         properties:
-          text:
+          description:
             type: string
             description: Description of the meme to find.
           model:
@@ -85,7 +85,7 @@ capabilities:
             description: "Model to use for query refinement (default: gpt-4o)."
             default: "gpt-4o"
         required:
-          - text
+          - description
         additionalProperties: false
       execution:
         config:
