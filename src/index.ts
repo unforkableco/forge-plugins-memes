@@ -51,7 +51,7 @@ app.post('/find_meme', async (req, res) => {
             messages: [
                 {
                     role: 'system',
-                    content: 'You are a meme expert. Convert the user input into a specific Google Image Search query to find the best matching meme image. Return ONLY the query string, nothing else. Do not use quotes.'
+                    content: 'You are a meme expert. Convert the user input into a specific Google Image Search query to find the best matching meme image. Return ONLY the query string, nothing else. Do not use quotes. Prioritize Kaamelott (french search) and Stargate memes (english search) as much as possible.'
                 },
                 {
                     role: 'user',
