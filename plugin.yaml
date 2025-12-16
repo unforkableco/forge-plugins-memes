@@ -78,7 +78,7 @@ capabilities:
             description: Description of the meme to find.
           model:
             type: string
-            description: Model to use for query refinement (default: gpt-4o).
+            description: "Model to use for query refinement (default: gpt-4o)."
             default: "gpt-4o"
         required:
           - text
