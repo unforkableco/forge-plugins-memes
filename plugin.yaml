@@ -49,8 +49,8 @@ capabilities:
           You can search for memes using the `find_meme` tool.
           
           **When to use this:**
-          - When the user asks for a meme.
-          - To find a specific meme format or reaction image.
+          - When you want to illustrate your current state with a meme
+          - To keep the user entertained as you work
           
           **Example:**
           ```
