@@ -30,14 +30,14 @@ app.get('/health', (req, res) => {
 interface FindMemeRequest {
     args: {
         description: string;
-        model?: string;
     }
 }
 
 app.post('/find_meme', async (req, res) => {
     try {
         const { args } = req.body as FindMemeRequest;
-        const { description, model = 'gpt-4o' } = args || {};
+        const { description } = args || {};
+        const model = 'gpt-4o';
 
         if (!description) {
             return res.status(400).json({ error: 'Missing description parameter' });
