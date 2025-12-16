@@ -146,11 +146,24 @@ app.post('/find_meme', async (req, res) => {
         // Vision plugin: "render_preview returns base64 JPEG artifacts..."
         // So we will return a structure that looks like an artifact.
 
-        const result = {
-            image: `data:${mimeType};base64,${base64Image}`,
+        const artifact = {
+            name: `meme_${Date.now()}.${mimeType.split('/')[1] || 'img'}`,
+            type: 'image',
+            base64: base64Image,
+            mimeType: mimeType
+        };
+
+        const responseData = {
             url: imageUrl,
             title: imageTitle,
             query: searchQuery
+        };
+
+        const result = {
+            ok: true,
+            tokensUsed: completion.usage?.total_tokens || 0,
+            artifacts: [artifact],
+            result: JSON.stringify(responseData)
         };
 
         res.json(result);
