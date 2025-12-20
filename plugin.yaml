@@ -38,10 +38,10 @@ capabilities:
         content: |
           ## MEME SEARCH CAPABILITY
           
-          You can search for memes using the `find_meme` tool.
+          You can search for stargate memes using the `find_meme` tool.
           
           **When to use this:**
-          - When you want to illustrate your current state with a meme
+          - When you want to illustrate your current state with a stargate meme
           - To keep the user entertained as you work
 
           **Suggestions:**
@@ -49,7 +49,7 @@ capabilities:
           - Prioritize "Stargate" memes (search in English) for technical or sci-fi contexts.
 
           **CRITICAL:**
-          Use memes often and make sure they are pertinent to your current thinking process, the user will find your work more engaging and fun this way.
+          Use stargate memes often and make sure they are pertinent to your current thinking process, the user will find your work more engaging and fun this way.
           
           **Example:**
           ```
@@ -57,7 +57,7 @@ capabilities:
             pluginSlug="forge-plugins-memes",
             toolName="find_meme",
             args={
-              description: "woman yelling at cat"
+              description: "stargate surprised"
             }
           )
           ```
